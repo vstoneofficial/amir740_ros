@@ -1,0 +1,84 @@
+# ros_control_boilerplate Settings -----------------------
+# Settings for ros_control control loop
+
+generic_hw_control_loop:
+  loop_hz: 50
+  cycle_time_error_threshold: 0.1
+
+# Settings for ros_control hardware interface (used in generic_hw_interface.cpp)
+hardware_interface:
+  joints:
+    - Joint_1
+    - Joint_2
+    - Joint_3
+    - Joint_4
+    - Joint_5
+    - Gripper
+
+# Publish all joint states ----------------------------------
+# Creates the /joint_states topic necessary in ROS
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+# Joint Trajectory Controller -------------------------------
+arm_position_trajectory_controller:
+  type: position_controllers/JointTrajectoryController
+  # These joints can likely just be copied from the hardware_interface list above
+  joints:
+    - Joint_1
+    - Joint_2
+    - Joint_3
+    - Joint_4
+    - Joint_5
+
+arm_velocity_trajectory_controller:
+  type: velocity_controllers/JointTrajectoryController
+  # These joints can likely just be copied from the hardware_interface list above
+  joints:
+    - Joint_1
+    - Joint_2
+    - Joint_3
+    - Joint_4
+    - Joint_5
+  gains:
+    Joint_1:
+      p: 3
+      d: 0
+      i: 0
+      i_clamp: 1
+    Joint_2:
+      p: 4
+      d: 0
+      i: 0
+      i_clamp: 1
+    Joint_3:
+      p: 4
+      d: 0
+      i: 0
+      i_clamp: 1
+    Joint_4:
+      p: 3
+      d: 0
+      i: 0
+      i_clamp: 1
+    Joint_5:
+      p: 4
+      d: 0
+      i: 0
+      i_clamp: 1
+
+gripper_position_trajectory_controller:
+  type: position_controllers/JointTrajectoryController
+  joints: 
+    - Gripper
+
+gripper_velocity_trajectory_controller:
+  type: velocity_controllers/JointTrajectoryController
+  joints: 
+    - Gripper
+  gains:
+    Gripper:
+      p: 8
+      d: 0
+      i: 0
+      i_clamp: 1

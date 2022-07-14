@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<robot name="amir_mecanum3" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+ <!-- Include mecanum3 rover URDF -->
+<xacro:include filename="$(find mecanum3_description)/urdf/mecanum3.xacro"/>
+ <!-- Include AMIR URDF -->
+<xacro:include filename="$(find amir_description)/urdf/amir_for_rover.xacro"/>
+
+<joint name="base_fixed" type="fixed">
+  <origin xyz="0.0 0.0 0.413" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="link0_1"/>
+</joint>
+
+</robot>

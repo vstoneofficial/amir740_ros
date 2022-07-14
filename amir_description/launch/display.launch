@@ -1,0 +1,29 @@
+<launch>
+  <arg name="rover_type"  default="none"  doc="mega3 / mecanum3 / f120a / none" />
+
+  <group if="$(eval rover_type=='none')">
+    <param name="robot_description" command="$(find xacro)/xacro $(find amir_description)/urdf/amir.xacro"/>
+    <node name="rviz" pkg="rviz" args="-d $(find amir_description)/launch/urdf.rviz" type="rviz" required="true"/>
+  </group>
+
+  <group if="$(eval rover_type=='f120a')">
+    <param name="robot_description" command="$(find xacro)/xacro $(find amir_description)/urdf/amir_f120a.xacro"/>
+    <node name="rviz" pkg="rviz" args="-d $(find amir_description)/launch/urdf-rover.rviz" type="rviz" required="true"/>
+  </group>
+
+  <group if="$(eval rover_type=='mega3')">
+    <param name="robot_description" command="$(find xacro)/xacro $(find amir_description)/urdf/amir_mega3.xacro"/>
+    <node name="rviz" pkg="rviz" args="-d $(find amir_description)/launch/urdf-rover.rviz" type="rviz" required="true"/>
+  </group>
+
+  <group if="$(eval rover_type=='mecanum3')">
+    <param name="robot_description" command="$(find xacro)/xacro $(find amir_description)/urdf/amir_mecanum3.xacro"/>
+    <node name="rviz" pkg="rviz" args="-d $(find amir_description)/launch/urdf-rover.rviz" type="rviz" required="true"/>
+  </group>
+
+  <arg name="use_gui" default="true" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" unless="$(arg use_gui)"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" if="$(arg use_gui)"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+</launch>

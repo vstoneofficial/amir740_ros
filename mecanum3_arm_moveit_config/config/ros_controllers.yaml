@@ -1,0 +1,44 @@
+arm_controller:
+  type: velocity_controllers/JointTrajectoryController
+  joints:
+    - Joint_1
+    - Joint_2
+    - Joint_3
+    - Joint_4
+    - Joint_5
+  gains:
+    Joint_1:
+      p: 1
+      d: 0
+      i: 0
+      i_clamp: 1
+    Joint_2:
+      p: 1
+      d: 0
+      i: 0
+      i_clamp: 1
+    Joint_3:
+      p: 1
+      d: 0
+      i: 0
+      i_clamp: 1
+    Joint_4:
+      p: 1
+      d: 0
+      i: 0
+      i_clamp: 1
+    Joint_5:
+      p: 1
+      d: 0
+      i: 0
+      i_clamp: 1
+gripper_controller:
+  type: velocity_controllers/JointTrajectoryController
+  joints:
+    - Gripper
+  gains:
+    Gripper:
+      p: 1
+      d: 0
+      i: 0
+      i_clamp: 1

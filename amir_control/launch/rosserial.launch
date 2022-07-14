@@ -1,0 +1,16 @@
+<!--
+AMIR 740をROSに接続launch fileです。
+
+起動コマンド： roslaunch amir_control rosserial.launch
+
+-->
+
+<launch>
+  <arg name="port" default="/dev/ttyUSB0"/>  <!-- VS-WRC058のデバイスファイルパスを設定してください -->
+  <arg name="baud" default="115200"/>
+
+  <node pkg="rosserial_python" type="serial_node.py" name="arm" output="screen">
+    <param name="port" value="$(arg port)"/>
+    <param name="baud" value="$(arg baud)"/>
+  </node>
+</launch>
