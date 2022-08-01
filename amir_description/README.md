@@ -7,6 +7,12 @@ roslaunch amir_description display.launch
 以下の画面が表示します。
 ![](../images/amir-description-rviz.png)
 
+台車のモデルを表示したい場合は、以下のコマンドでリポジトリをクローンしてください
+```
+git clone https://github.com/vstoneofficial/megarover_description.git # メガローバーの場合
+git clone https://github.com/vstoneofficial/mecanumrover_description.git　# メカナムローバーの場合
+```
+
 メガローバーF120Aに取りつけた場合は
 ```
 roslaunch amir_description display.launch rover_type:=f120a
