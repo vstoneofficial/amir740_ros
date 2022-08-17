@@ -19,3 +19,12 @@
   - メガローバー Ver3.0に搭載したAMIR 740 MoveItの設定パッケージ
 - ros_control_boilerplate
   - ROS_controlのハードウェアインターフェイスをセットアップするためのテンプレート
+
+## 変更履歴
+### 1.1.0 (2022-08-17)
+- Gazeboシミュレータ機能を実装(詳細は[amir_moveit_configのREADME.md](amir_moveit_config/README.md)参照)
+- AMIR 740の物理的パラメータの調整
+- グリッパのジョイント名の変更
+
+### 1.0.0 (2022-07-14)
+- 初版

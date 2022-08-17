@@ -37,23 +37,15 @@ public:
   virtual void enforceLimits(ros::Duration& period);
 
 protected:
-  std::vector<double> p_error_;
-  std::vector<double> p_error_prev_;
-  std::vector<double> cum_p_error_;
-  std::vector<double> rate_p_error_;
-  double v_error_;
-  
   ros::Subscriber sensor_sub;
   ros::Subscriber goal_pos_sub_arm;
   ros::Subscriber goal_pos_sub_gripper;
   void sensorCallback(const amir_control::jointSensor::ConstPtr& msg);
   void armGoalCallback(const control_msgs::FollowJointTrajectoryActionGoal::ConstPtr& goal);
   void gripperGoalCallback(const control_msgs::FollowJointTrajectoryActionGoal::ConstPtr& goal);
-  // void goalCallback(const std_msgs::Float32MultiArray::ConstPtr& msg);
 
 
   ros::Publisher cmd_pub;
-  std::vector<double> joint_position_prev_;
   std::vector<double> joint_velocity_prev_;
   const float maxAngle[6] = {170.0,     0.0, 160.0, 120.0,  158.0, 60.0};
   const float minAngle[6] = {-170.0, -135.0,   0.0, -75.0, -158.0, -15.0};

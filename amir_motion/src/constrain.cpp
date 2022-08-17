@@ -77,7 +77,7 @@ void moveSingleJoint(moveit::planning_interface::MoveGroupInterface &group, int 
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "joint_test");
+    ros::init(argc, argv, "joint_constrain_sample");
     ros::AsyncSpinner spinner(1);
     spinner.start();
 
@@ -95,29 +95,10 @@ int main(int argc, char **argv)
     gripper.setMaxVelocityScalingFactor(MAX_VEL_GRIPPER);
     gripper.setMaxAccelerationScalingFactor(MAX_ACC_GRIPPER);
 
-    // get current joint angles
-    std::vector<double> home_pose = {169, 134, -159, -74, -157};
-    std::vector<double> bow_pose = {-0, 134, -134, 90, 0};
-    std::vector<double> extended_pose = {0, 0, 0, 0, 0};
-    
-
-    // moveArm(arm, 0.02, 0.0, 0.65, 0, -90, 0, 0.6);
-    // moveArm(arm, 0.0, 0.10, 0.185 + 0.4365, -90, 0, 0, 0.6);
-    // moveArmWithAngles(arm, bow_pose, 0.6);
-    // current_state = arm.getCurrentState();
-    // current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
-
-
-    // current_state->setFromIK(joint_model_group, target_pose);
-    // arm.setStartStateToCurrentState();
-    // arm.setPoseTarget(target_pose);
-    // arm.setPlanningTime(10.0);
-
-
     while (ros::ok())
     {   
         visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to move to front");
-        moveArm(arm, 0.0, 0.50, 0.185, -90, 0, 0, 0.6);
+        moveArm(arm, 0.0, 0.50, 0.2, -90, 0, 0, 0.6);
         visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to move back");
         arm.setMaxVelocityScalingFactor(MAX_VEL_ARM);
         arm.setMaxAccelerationScalingFactor(MAX_ACC_ARM);
@@ -127,10 +108,10 @@ int main(int argc, char **argv)
         target_pose.orientation = tf2::toMsg(orientation);
         target_pose.position.x = 0.0;
         target_pose.position.y = 0.5;
-        target_pose.position.z = 0.185;
+        target_pose.position.z = 0.2;
 
         std::vector<geometry_msgs::Pose> waypoints;
-        target_pose.position.y = 0.10;
+        target_pose.position.y = 0.20;
         waypoints.push_back(target_pose);
 
 
@@ -147,7 +128,7 @@ int main(int argc, char **argv)
         current_state = arm.getCurrentState();
         current_state->copyJointGroupPositions(joint_model_group, joint_group_positions);
         visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to move to front");
-        moveArm(arm, 0.0, 0.50, 0.185, -90, 0, 0, 0.6);
+        moveArm(arm, 0.0, 0.50, 0.2, -90, 0, 0, 0.6);
 
         visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to move to front");
         arm.execute(my_plan);

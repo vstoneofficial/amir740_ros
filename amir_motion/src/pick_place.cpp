@@ -12,7 +12,7 @@
 // const double DEG_TO_RAD = M_PI / 180.0;
 const double BASE_HEIGHT = 0.248;
 const std::vector<double> OBJECT_DIMENSION = {0.075, 0.03, 0.13}; // x, y, z
-const std::vector<double> OBJECT_POSITION = {0.3, 0.0, 0.0 - BASE_HEIGHT};      // x, y, z
+const std::vector<double> OBJECT_POSITION = {0.3, -0.018171 + OBJECT_DIMENSION[1] / 2.0, -BASE_HEIGHT + OBJECT_DIMENSION[2] / 2.0};      // x, y, z
 
 void controlGripper(moveit::planning_interface::MoveGroupInterface &group, double angle)
 {
@@ -28,7 +28,7 @@ void controlGripper(moveit::planning_interface::MoveGroupInterface &group, doubl
 
     gripper_current_state = group.getCurrentState();
     group.setJointValueTarget(gripper_close_angle);
-    group.setGoalTolerance(0.01);
+    group.setGoalTolerance(0.1);
     success = (group.plan(plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
     if (success)
     {
@@ -106,7 +106,7 @@ void addCollisionObjects(moveit::planning_interface::PlanningSceneInterface &pla
 
     /* Define the pose of the table. */
     collision_objects[0].primitive_poses.resize(1);
-    collision_objects[0].primitive_poses[0].position.x = 0.0;
+    collision_objects[0].primitive_poses[0].position.x = 1e-6;
     collision_objects[0].primitive_poses[0].position.y = -0.39;
     collision_objects[0].primitive_poses[0].position.z = -collision_objects[0].primitives[0].dimensions[2] / 2 - BASE_HEIGHT;
 
@@ -128,7 +128,7 @@ void addCollisionObjects(moveit::planning_interface::PlanningSceneInterface &pla
     collision_objects[1].primitive_poses.resize(1);
     collision_objects[1].primitive_poses[0].position.x = OBJECT_POSITION[0];
     collision_objects[1].primitive_poses[0].position.y = OBJECT_POSITION[1];
-    collision_objects[1].primitive_poses[0].position.z = OBJECT_POSITION[2] + OBJECT_DIMENSION[2] / 2;
+    collision_objects[1].primitive_poses[0].position.z = OBJECT_POSITION[2];
     // END_SUB_TUTORIAL
 
     collision_objects[1].operation = collision_objects[1].ADD;
@@ -147,7 +147,7 @@ int main(int argc, char **argv)
     moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
     moveit::planning_interface::MoveGroupInterface arm("arm");
     moveit::planning_interface::MoveGroupInterface gripper("gripper");
-    arm.setPlanningTime(30.0);
+    arm.setPlanningTime(10.0);
 
     addCollisionObjects(planning_scene_interface);
 
@@ -156,26 +156,26 @@ int main(int argc, char **argv)
     arm.setSupportSurfaceName("table1");
     
     ROS_INFO("move arm to starting pose");
-    move(arm, 0.0, 0.25, 0.3, 0, 0, 0, 0.6);
+    move(arm, 1e-6, 0.3, 0.3, 1e-6, 1e-6, 1e-6, 0.6);
     ROS_INFO("move gripper to position above object");
-    move(arm, OBJECT_POSITION[0], OBJECT_POSITION[1] - 0.004, OBJECT_POSITION[2] + OBJECT_DIMENSION[2] / 2 + 0.2, -90, 0, -90, 0.6);
+    move(arm, OBJECT_POSITION[0], OBJECT_POSITION[1], OBJECT_DIMENSION[2] + 0.05, -90.0, 1e-6, -90.0, 0.6);
     controlGripper(gripper, -60.0);
     ROS_INFO("lower gripper slowly");
-    move(arm, OBJECT_POSITION[0], OBJECT_POSITION[1] - 0.004, OBJECT_POSITION[2] + OBJECT_DIMENSION[2] / 2 + 0.15, -90, 0, -90, 0.3);
+    move(arm, OBJECT_POSITION[0], OBJECT_POSITION[1], OBJECT_DIMENSION[2] - 0.01, -90.0, 1e-6, -90.0, 0.3);
     controlGripper(gripper, -15.0);
     attachObject();
     ROS_INFO("lift up object slowly");
-    move(arm, OBJECT_POSITION[0], OBJECT_POSITION[1] - 0.004, OBJECT_POSITION[2] + OBJECT_DIMENSION[2] / 2 + 0.3, -90, 0, -90, 0.3);
+    move(arm, OBJECT_POSITION[0], OBJECT_POSITION[1], OBJECT_DIMENSION[2] + 0.1, -90.0, 1e-6, -90.0, 0.3);
     ROS_INFO("move to opposite side (normal speed)");
-    move(arm, -OBJECT_POSITION[0], OBJECT_POSITION[1] - 0.004, OBJECT_POSITION[2] + OBJECT_DIMENSION[2] / 2 + 0.3, -90, 0, 90, 0.6);
+    move(arm, -OBJECT_POSITION[0], OBJECT_POSITION[1], OBJECT_DIMENSION[2] + 0.2, -90.0, 1e-6, 90.0, 0.6);
     ROS_INFO("place object slowly");
-    move(arm, -OBJECT_POSITION[0], OBJECT_POSITION[1] - 0.004, OBJECT_POSITION[2] + OBJECT_DIMENSION[2] / 2 + 0.16, -90, 0, 90, 0.3);
+    move(arm, -OBJECT_POSITION[0], OBJECT_POSITION[1], OBJECT_DIMENSION[2] - 0.001, -90.0, 1e-6, 90.0, 0.3);
     controlGripper(gripper, -60.0);
     detachObject();
     ROS_INFO("raise gripper a little");
-    move(arm, -OBJECT_POSITION[0], OBJECT_POSITION[1] - 0.004, OBJECT_POSITION[2] + OBJECT_DIMENSION[2] / 2 + 0.24, -90, 0, 90, 0.3);
+    move(arm, -OBJECT_POSITION[0], OBJECT_POSITION[1], OBJECT_DIMENSION[2] + 0.05, -90.0, 1e-6, 90.0, 0.3);
     ROS_INFO("move arm back to starting position");
-    move(arm, 0.0, 0.25, 0.3, 0, 0, 0, 0.6);
+    move(arm, 1e-6, 0.25, 0.3, 1e-6, 1e-6, 1e-6, 0.6);
     ROS_INFO("done");
 
     ros::waitForShutdown();

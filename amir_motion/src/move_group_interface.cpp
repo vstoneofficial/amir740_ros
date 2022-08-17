@@ -40,7 +40,7 @@ int main(int argc, char** argv)
         move_group_interface.getCurrentState()->getJointModelGroup(PLANNING_GROUP);
 
     namespace rvt = rviz_visual_tools;
-    moveit_visual_tools::MoveItVisualTools visual_tools("link0_1");
+    moveit_visual_tools::MoveItVisualTools visual_tools("dummy_link");
     visual_tools.deleteAllMarkers();
 
     visual_tools.loadRemoteControl();
@@ -66,13 +66,13 @@ int main(int argc, char** argv)
     visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to start the demo");
 
     tf2::Quaternion orientation;
-    orientation.setRPY(tf2Radians(-90), tf2Radians(0), tf2Radians(0));
+    orientation.setRPY(tf2Radians(-90.0), tf2Radians(1e-6), tf2Radians(1e-6));
 
     geometry_msgs::Pose target_pose1;
     target_pose1.orientation = tf2::toMsg(orientation);
-    target_pose1.position.x = 0.0;
+    target_pose1.position.x = 1e-6;
     target_pose1.position.y = 0.18;
-    target_pose1.position.z = 0.10;
+    target_pose1.position.z = 0.20;
     move_group_interface.setPoseTarget(target_pose1);
 
     moveit::planning_interface::MoveGroupInterface::Plan my_plan;
@@ -130,8 +130,8 @@ int main(int argc, char** argv)
     // Planning with Path Constraints
     ///////////////////////////////////
     moveit_msgs::OrientationConstraint ocm;
-    ocm.link_name = "link5_1";
-    ocm.header.frame_id = "link0_1";
+    ocm.link_name = "tcp_link";
+    ocm.header.frame_id = "dummy_link";
     ocm.orientation = tf2::toMsg(orientation);
     ocm.absolute_x_axis_tolerance = 0.1;
     ocm.absolute_y_axis_tolerance = 0.1;
@@ -266,7 +266,7 @@ int main(int argc, char** argv)
     box_pose.orientation.w = 1.0;
     box_pose.position.x = 0.0;
     box_pose.position.y = 0.25;
-    box_pose.position.z = -0.1;
+    box_pose.position.z = 0.0;
 
     collision_object.primitives.push_back(primitive);
     collision_object.primitive_poses.push_back(box_pose);
@@ -311,8 +311,8 @@ int main(int argc, char** argv)
     orientation.setRPY(tf2Radians(90), tf2Radians(0), tf2Radians(0));
     grab_pose.orientation = tf2::toMsg(orientation);
     grab_pose.position.z = 0.0;
-    grab_pose.position.y = 0.16;
-    
+    grab_pose.position.y = 0.10;
+
 
     // First, we add the object to the world (without using a vector)
     object_to_attach.primitives.push_back(cylinder_primitive);

@@ -9,7 +9,7 @@
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "move_group_RPY");
+    ros::init(argc, argv, "move_group_RPY_sample");
     ros::NodeHandle n;
 
     ros::AsyncSpinner spinner(1);
@@ -24,21 +24,24 @@ int main(int argc, char **argv)
 
     ROS_INFO("Begin Planning...");
 
-    double roll = 0;  // red x
-    double pitch = 0; // green y
-    double yaw = 0;   // blue z
+    double roll  = 1e-6;  // red x (right)
+    double pitch = 1e-6;  // green y (front)
+    double yaw   = 1e-6;  // blue z
 
-    yaw = -90;
+    roll = -90.0; 
+    yaw = -90.0; // unit: deg
     tf2::Quaternion orientation;
     orientation.setRPY(tf2Radians(roll), tf2Radians(pitch), tf2Radians(yaw));
+    // orientation.setRPY(-1.57079632679, 1e-6, -1.57079632679);
 
     geometry_msgs::Pose pose1;
     pose1.orientation = tf2::toMsg(orientation);
-    pose1.position.x = 0.25;
-    pose1.position.y = 0.0;
-    pose1.position.z = 0.25;
+    pose1.position.x = 0.4; // unit: m
+    pose1.position.y = 1e-6;
+    pose1.position.z = 0.13 + 0.1;
     move_group.setPoseTarget(pose1);
-    move_group.setGoalTolerance(0.01);
+    move_group.setGoalTolerance(0.1);
+    move_group.setPlanningTime(6.0);
     move_group.move();
 
     ROS_INFO("Done moving...");

@@ -3,7 +3,13 @@
   <arg name="paused" default="false"/>
   <arg name="gazebo_gui" default="true"/>
   <arg name="initial_joint_positions" doc="Initial joint configuration of the robot"
-       default=" -J Joint_1 2.95 -J Joint_2 2.3 -J Joint_3 -2.7799 -J Joint_4 -1.29 -J Joint_5 -2.74"/>
+       default=" -J Joint_1 0 
+                 -J Joint_2 0 
+                 -J Joint_3 0 
+                 -J Joint_4 0 
+                 -J Joint_5 0
+                 -J Gripper 0
+                 "/>
 
   <!-- startup simulated world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -13,7 +19,7 @@
   </include>
 
   <!-- send robot urdf to param server -->
-  <param name="robot_description" command="xacro  '$(find amir_description)/urdf/amir.xacro'" />
+  <param name="robot_description" command="$(find xacro)/xacro '$(find amir_description)/urdf/amir.xacro'" />
 
   <!-- unpause only after loading robot model -->
   <arg name="unpause" value="$(eval '' if arg('paused') else '-unpause')" />
@@ -29,4 +35,10 @@
   <!-- Load ROS controllers -->
   <include file="$(dirname)/ros_controllers.launch"/>
 
+  <param name="move_group/trajectory_execution/execution_duration_monitoring" value="false" />
+  <param name="move_group/trajectory_execution/allowed_start_tolerance" value="0.0" />
+  <param name="move_group/trajectory_execution/allowed_execution_duration_scaling" value="3.0" />
+
+  <!-- Start rqt_joint_trajectory_controller to move joints -->
+  <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" />
 </launch>

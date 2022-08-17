@@ -45,7 +45,7 @@ void moveGripper(moveit::planning_interface::MoveGroupInterface& group, double a
 int main(int argc, char **argv)
 {
 
-    ros::init(argc, argv, "move group with target joint value");
+    ros::init(argc, argv, "move_group_joint_value_sample");
 
     ros::AsyncSpinner spinner(1);
     spinner.start();
@@ -60,14 +60,14 @@ int main(int argc, char **argv)
 
     // get current joint angles
     std::vector<double> home_pose = {170, 135, -160, 75, -158};
-    std::vector<double> ready_pose = {-0, 135, -135, 0, 5};
-    std::vector<double> joint1_max = {170, 135, -135, 0, 5};
-    std::vector<double> joint1_min = {-170, 135, -135, 0, 5};
-    std::vector<double> joint3_folded = {-0, 135, -160, 0, 5};
-    std::vector<double> joint3_extended = {-0, 135, -0, 0, 5};
-    std::vector<double> extended_pose = {0, 0, 0, 0, 5};
-    std::vector<double> joint4_down = {0, 0, 0, -120, 5};
-    std::vector<double> joint4_up = {0, 0, 0, 75, 5};
+    std::vector<double> ready_pose = {-0, 135, -135, 0, 0};
+    std::vector<double> joint1_max = {170, 135, -135, 0, 0};
+    std::vector<double> joint1_min = {-170, 135, -135, 0, 0};
+    std::vector<double> joint3_folded = {-0, 135, -160, 0, 0};
+    std::vector<double> joint3_extended = {-0, 135, -0, 0, 0};
+    std::vector<double> extended_pose = {0, 0, 0, 0, 0};
+    std::vector<double> joint4_down = {0, 0, 0, -120, 0};
+    std::vector<double> joint4_up = {0, 0, 0, 75, 0};
     std::vector<double> joint5_min = {0, 0, 0, 0, -158};
     std::vector<double> joint5_max = {0, 0, 0, 0, 158};
 
@@ -92,9 +92,9 @@ int main(int argc, char **argv)
         moveArm(arm, joint5_max, 0.0, 0.7);
         moveArm(arm, extended_pose, 0.5, 0.7);
         ROS_INFO("close gripper");
-        moveGripper(gripper, 15, 0.5, MAX_VEL_GRIPPER);
+        moveGripper(gripper, 14, 0.5, MAX_VEL_GRIPPER);
         ROS_INFO("open gripper");
-        moveGripper(gripper, -60, 0.5, MAX_VEL_GRIPPER);
+        moveGripper(gripper, -59, 0.5, MAX_VEL_GRIPPER);
         ROS_INFO("done");
 
     }

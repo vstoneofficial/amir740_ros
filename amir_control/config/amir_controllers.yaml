@@ -23,7 +23,6 @@ joint_state_controller:
 # Joint Trajectory Controller -------------------------------
 arm_position_trajectory_controller:
   type: position_controllers/JointTrajectoryController
-  # These joints can likely just be copied from the hardware_interface list above
   joints:
     - Joint_1
     - Joint_2
@@ -33,7 +32,6 @@ arm_position_trajectory_controller:
 
 arm_velocity_trajectory_controller:
   type: velocity_controllers/JointTrajectoryController
-  # These joints can likely just be copied from the hardware_interface list above
   joints:
     - Joint_1
     - Joint_2

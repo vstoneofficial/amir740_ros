@@ -117,10 +117,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        link5_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         outer_link_left_1:
           Alpha: 1
           Show Axes: false
@@ -131,6 +127,15 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        tcp_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -196,7 +201,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.27039650082588196
+      Pitch: 0.3103964626789093
       Target Frame: <Fixed Frame>
       Yaw: 2.0935988426208496
     Saved: ~
@@ -216,5 +221,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1216
-  X: 573
-  Y: 34
+  X: 541
+  Y: 2

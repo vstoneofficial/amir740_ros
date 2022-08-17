@@ -1,70 +1,80 @@
 # MoveIt-specific simulation settings
 moveit_sim_hw_interface:
-    joint_model_group: controllers_initial_group_
-    joint_model_group_pose: controllers_initial_pose_
+  joint_model_group: controllers_initial_group_
+  joint_model_group_pose: controllers_initial_pose_
 # Settings for ros_control control loop
 generic_hw_control_loop:
-    loop_hz: 300
-    cycle_time_error_threshold: 0.01
+  loop_hz: 50
+  cycle_time_error_threshold: 0.01
 # Settings for ros_control hardware interface
 hardware_interface:
-    joints:
-        - Joint_1
-        - Joint_2
-        - Joint_3
-        - Joint_4
-        - Joint_5
-        - Gripper
-    sim_control_mode: 1  # 0: position, 1: velocity
+  joints:
+    - Joint_1
+    - Joint_2
+    - Joint_3
+    - Joint_4
+    - Joint_5
+    - Gripper
+  sim_control_mode: 1  # 0: position, 1: velocity
 # Publish all joint states
 # Creates the /joint_states topic necessary in ROS
 joint_state_controller:
-    type: joint_state_controller/JointStateController
-    publish_rate: 50
-    
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
 arm_controller:
-    type: effort_controllers/JointTrajectoryController
-    joints:
-        - Joint_1
-        - Joint_2
-        - Joint_3
-        - Joint_4
-        - Joint_5
-    gains:
-        Joint_1: { p: 12000, d: 50, i: 0.0, i_clamp: 10000 }
-        Joint_2: { p: 30000, d: 100, i: 0.02, i_clamp: 10000 }
-        Joint_3: { p: 18000, d: 50, i: 0.01, i_clamp: 1 }
-        Joint_4: { p: 18000, d: 70, i: 0.01, i_clamp: 10000 }
-        Joint_5: { p: 12000, d: 70, i: 0.01, i_clamp: 1 }
+  type: velocity_controllers/JointTrajectoryController
+  joints:
+    - Joint_1
+    - Joint_2
+    - Joint_3
+    - Joint_4
+    - Joint_5
+  gains:
+    Joint_1: { p: 5000, d: 0, i: 0, i_clamp: 0.1 }
+    Joint_2: { p: 6000, d: 0, i: 0, i_clamp: 0.1 }
+    Joint_3: { p: 5000, d: 0, i: 0, i_clamp: 0.1 }
+    Joint_4: { p: 3000, d: 0, i: 0, i_clamp: 0.1 }
+    Joint_5: { p: 3000, d: 0, i: 0, i_clamp: 0.1 }
 
-    constraints:
-        goal_time: 2.0
-    state_publish_rate: 25
+  constraints:
+    goal_time: 3.0
+    stopped_velocity_tolerance: 0
+    Joint_1: {trajectory: 0.2, goal: 0.1}
+    Joint_2: {trajectory: 0.2, goal: 0.1}
+    Joint_3: {trajectory: 0.2, goal: 0.1}
+    Joint_4: {trajectory: 0.2, goal: 0.1}
+    Joint_5: {trajectory: 0.2, goal: 0.1}
+
+  state_publish_rate: 25
 
 gripper_controller:
-    type: effort_controllers/JointTrajectoryController
-    joints:
-        - Gripper
+  type: velocity_controllers/JointTrajectoryController
+  joints:
+    - Gripper
+  gains:
+    Gripper: { p: 3000, d: 0, i: 0, i_clamp: 0.1 }
+    
+  constraints:
+    goal_time: 3.0
+    stopped_velocity_tolerance: 0
+    Gripper: {trajectory: 0.2, goal: 0.1}
 
-    gains:
-        Gripper: { p: 10, d: 3.0, i: 0, i_clamp: 1 }
-
-    state_publish_rate: 25
+  state_publish_rate: 25
 
 controller_list:
-    - name: arm_controller
-      action_ns: follow_joint_trajectory
-      type: FollowJointTrajectory
-      default: true
-      joints:
-        - Joint_1
-        - Joint_2
-        - Joint_3
-        - Joint_4
-        - Joint_5
-    - name: gripper_controller
-      action_ns: follow_joint_trajectory
-      type: FollowJointTrajectory
-      default: true
-      joints:
-        - Gripper
+  - name: arm_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - Joint_1
+      - Joint_2
+      - Joint_3
+      - Joint_4
+      - Joint_5
+  - name: gripper_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - Gripper

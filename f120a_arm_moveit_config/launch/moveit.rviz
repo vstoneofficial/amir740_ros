@@ -135,10 +135,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          link5_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           outer_link_left_1:
             Alpha: 1
             Show Axes: false
@@ -150,6 +146,11 @@ Visualization Manager:
             Show Trail: false
             Value: true
           right_wheel_1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          tcp_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -264,10 +265,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          link5_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           outer_link_left_1:
             Alpha: 1
             Show Axes: false
@@ -279,6 +276,11 @@ Visualization Manager:
             Show Trail: false
             Value: true
           right_wheel_1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          tcp_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -371,5 +373,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1291
-  X: 217
-  Y: 1
+  X: 549
+  Y: 1456

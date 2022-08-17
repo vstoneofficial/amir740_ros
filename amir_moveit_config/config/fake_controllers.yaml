@@ -13,4 +13,4 @@ controller_list:
       - Gripper
 initial:  # Define initial robot poses per group
   - group: arm
-    pose: home
+    pose: ready

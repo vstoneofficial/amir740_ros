@@ -127,10 +127,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        link5_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         outer_link_left_1:
           Alpha: 1
           Show Axes: false
@@ -142,6 +138,11 @@ Visualization Manager:
           Show Trail: false
           Value: true
         right_wheel_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        tcp_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -231,5 +232,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1216
-  X: 541
-  Y: 2
+  X: 403
+  Y: 1456

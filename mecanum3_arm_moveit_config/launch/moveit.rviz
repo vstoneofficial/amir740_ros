@@ -149,16 +149,17 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          link5_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           outer_link_left_1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
           outer_link_right_1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          tcp_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -288,16 +289,17 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          link5_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           outer_link_left_1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
           outer_link_right_1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          tcp_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -341,7 +343,7 @@ Visualization Manager:
       Near Clip Distance: 0.009999999776482582
       Pitch: 0.5
       Target Frame: base_footprint
-      Yaw: -0.6232355833053589
+      Yaw: 5.659949779510498
     Saved: ~
 Window Geometry:
   Displays:
@@ -359,5 +361,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1291
-  X: 298
-  Y: 67
+  X: 777
+  Y: 1471
