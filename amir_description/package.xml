@@ -1,21 +1,15 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>amir_description</name>
-  <version>0.0.0</version>
-<description>The amir_description package</description>
+  <version>1.0.0</version>
+  <description>3D models of the AMIR 740 for simulation and visualization</description>
+  <maintainer email="infodesk@vstone.co.jp">Vstone</maintainer>
 
-  <maintainer email="infodesk@vstone.co.jp">vstone</maintainer>
-
-
+  <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>rospy</build_depend>
-  <build_export_depend>rospy</build_export_depend>
-  <exec_depend>rospy</exec_depend>
+  <depend>urdf</depend>
+  <depend>xacro</depend>
 
-
-  <export>
-
-  </export>
 </package>

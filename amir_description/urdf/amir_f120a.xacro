@@ -2,7 +2,7 @@
 <robot name="amir_f120a" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
  <!-- Include F120A rover URDF -->
-<xacro:include filename="$(find f120a_description)/urdf/f120a.xacro"/>
+<xacro:include filename="$(find megarover_description)/urdf/f120a_base_model.xacro"/>
  <!-- Include AMIR URDF -->
 <xacro:include filename="$(find amir_description)/urdf/amir_for_rover.xacro"/>
 
