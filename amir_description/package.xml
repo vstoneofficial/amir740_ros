@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>amir_description</name>
-  <version>1.0.0</version>
+  <version>1.1.1</version>
   <description>3D models of the AMIR 740 for simulation and visualization</description>
+  
   <maintainer email="infodesk@vstone.co.jp">Vstone</maintainer>
 
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
