@@ -1,0 +1,151 @@
+<?xml version="1.0" ?>
+<robot name="amir" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<xacro:property name="body_color" value="Gazebo/Silver" />
+
+<gazebo>
+  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+    <joint>Gripper</joint>
+    <mimicJoint>left_inner_back_joint</mimicJoint>
+    <multiplier>1.0</multiplier>
+    <offset>0</offset>
+    <maxEffort>10.0</maxEffort>
+  </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+    <joint>Gripper</joint>
+    <mimicJoint>left_outer_back_joint</mimicJoint>
+    <multiplier>1.0</multiplier>
+    <offset>0</offset>
+    <maxEffort>10.0</maxEffort>
+  </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+    <joint>Gripper</joint>
+    <mimicJoint>right_outer_back_joint</mimicJoint>
+    <multiplier>1.0</multiplier>
+    <offset>0</offset>
+    <maxEffort>10.0</maxEffort>
+  </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+    <joint>Gripper</joint>
+    <mimicJoint>left_inner_front_joint</mimicJoint>
+    <multiplier>1.0</multiplier>
+    <offset>0</offset>
+    <maxEffort>10.0</maxEffort>
+  </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+    <joint>Gripper</joint>
+    <mimicJoint>right_inner_front_joint</mimicJoint>
+    <multiplier>1.0</multiplier>
+    <offset>0</offset>
+    <maxEffort>10.0</maxEffort>
+  </plugin>
+</gazebo>
+
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <controlPeriod>0.001</controlPeriod>
+  </plugin>
+</gazebo>
+
+<gazebo reference="link0_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>true</selfCollide>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="link1_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="link2_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="link3_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="link4_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="tcp_link">
+  <material>Gazebo/RedTransparent</material>
+</gazebo>
+
+<gazebo reference="gripper_base_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="inner_link_left_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>false</selfCollide>
+</gazebo>
+
+<gazebo reference="outer_link_right_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>false</selfCollide>
+</gazebo>
+
+<gazebo reference="outer_link_left_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>false</selfCollide>
+</gazebo>
+
+<gazebo reference="finger_right_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>false</selfCollide>
+</gazebo>
+
+<gazebo reference="finger_left_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>false</selfCollide>
+</gazebo>
+
+<gazebo reference="inner_link_right_1">
+  <material>${body_color}</material>
+  <mu1>1.4</mu1>
+  <mu2>1.4</mu2>
+  <selfCollide>false</selfCollide>
+</gazebo>
+
+</robot>

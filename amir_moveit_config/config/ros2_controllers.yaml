@@ -1,0 +1,70 @@
+# This config file is used by ros2_control
+controller_manager:
+  ros__parameters:
+    update_rate: 60  # Hz
+
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    gripper_controller:
+      type: position_controllers/GripperActionController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+arm_controller:
+  ros__parameters:
+    joints:
+      - Joint_1
+      - Joint_2
+      - Joint_3
+      - Joint_4
+      - Joint_5
+    command_interfaces:
+      - position
+      - velocity
+    state_interfaces:
+      - position
+      - velocity
+
+    state_publish_rate: 200.0
+    action_monitor_rate: 20.0
+
+    allow_partial_joints_goal: true
+    open_loop_control: false
+    allow_integration_in_goal_trajectories: true
+    constraints:
+      stopped_velocity_tolerance: 0.05 # Defaults to 0.01
+      goal_time: 0.0 # Defaults to 0.0 (start immediately)
+    # TODO: currently not used...
+    # https://github.com/ros-controls/ros2_controllers/blob/master/joint_trajectory_controller/src/joint_trajectory_controller.cpp
+    gains:
+      Joint_1:
+        p: 5.0
+        i: 2.0
+        d: 0.0
+        i_clamp: 2.0
+      Joint_2:
+        p: 5.0
+        i: 2.0
+        d: 0.0
+        i_clamp: 2.0
+      Joint_3:
+        p: 5.0
+        i: 2.0
+        d: 0.0
+        i_clamp: 2.0
+      Joint_4:
+        p: 5.0
+        i: 2.0
+        d: 0.0
+        i_clamp: 2.0
+      Joint_5:
+        p: 5.0
+        i: 2.0
+        d: 0.0
+        i_clamp: 2.0
+
+gripper_controller:
+  ros__parameters:
+    joint: Gripper

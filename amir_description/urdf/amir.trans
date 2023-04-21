@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<robot name="amir" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<transmission name="Joint_1_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Joint_1">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Joint_1_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="Joint_2_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Joint_2">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Joint_2_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="Joint_3_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Joint_3">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Joint_3_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="Joint_4_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Joint_4">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Joint_4_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="Joint_5_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Joint_5">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Joint_5_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="Gripper_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Gripper">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Gripper_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<!-- COMMENT OUT to let mimic joint control all gripper joints -->
+<!-- <transmission name="left_inner_back_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="left_inner_back_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="left_inner_back_joint_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="right_outer_back_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="right_outer_back_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="right_outer_back_joint_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="left_outer_back_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="left_outer_back_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="left_outer_back_joint_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission> -->
+
+<!-- <transmission name="right_inner_front_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="right_inner_front_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="right_inner_front_joint_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="left_inner_front_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="left_inner_front_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="left_inner_front_joint_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission> -->
+
+<!-- <transmission name="right_outer_front_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="right_outer_front_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="right_outer_front_joint_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="left_outer_front_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="left_outer_front_joint">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="left_outer_front_joint_actr">
+    <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission> -->
+
+</robot>

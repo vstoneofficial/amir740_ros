@@ -1,0 +1,22 @@
+publisher_joint_trajectory_controller:
+  ros__parameters:
+
+    controller_name: "arm_controller"
+    wait_sec_between_publish: 5
+
+    goal_names: ["pos1", "pos2", "pos3", "pos4", "pos5", "pos6"]
+    pos1: [2.97, 2.36, -2.79, 1.31, -2.76]
+    pos2: [2.50, 2.00, -2.40, 1.20, 0.0]
+    pos3: [0.00, 2.3, -2.3, 0.00, 2.76]
+    pos4: [-1.7, 1.5708, 0.0, -1.5708, 0.0]
+    pos5: [0.00, 2.3, -2.3, 0.00, 2.76]
+    pos6: [2.50, 2.00, -2.40, 1.20, 0.0]
+
+    joints:
+      - Joint_1
+      - Joint_2
+      - Joint_3
+      - Joint_4
+      - Joint_5
+
+    check_starting_point: false

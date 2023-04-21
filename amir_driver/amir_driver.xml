@@ -1,0 +1,9 @@
+<library path="amir_driver">
+  <class name="amir_driver/AmirHardwareInterfaces"
+         type="amir_driver::AmirHardwareInterfaces"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      ros2_control hardware interface for controlling AMIR.
+    </description>
+  </class>
+</library>

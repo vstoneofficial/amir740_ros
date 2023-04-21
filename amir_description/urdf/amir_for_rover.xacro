@@ -1,0 +1,517 @@
+<?xml version="1.0" ?>
+<robot name="amir_for_rover" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find amir_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find amir_description)/urdf/amir.trans" />
+<xacro:include filename="$(find amir_description)/urdf/amir.gazebo" />
+
+<link name="link0_1">
+  <inertial>
+    <origin xyz="0.0 -0.018171 -0.164351" rpy="0 0 0"/>
+    <mass value="2.37148"/>
+    <inertia ixx="0.01020" 
+             iyy="0.008745" 
+             izz="0.008637" 
+             ixy="-0.000000291275" 
+             iyz="-0.0001135" 
+             ixz="0.000000428733"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link1_1">
+  <inertial>
+    <origin xyz="0.00 -0.015481739081542548 0.052015680869348734" rpy="0 0 0"/>
+    <mass value="1.530171"/>
+    <inertia ixx="0.003518" 
+             iyy="0.003654" 
+             izz="0.004561" 
+             ixy="0.0002342" 
+             iyz="0.00002134302" 
+             ixz="-0.000060488629"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.00 0.001523 0.097" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="0.00 0.001523 0.097" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link2_1">
+  <inertial>
+    <origin xyz="0.00 0.13301271963728503 0.014415028610505691" rpy="0 0 0"/>
+    <mass value="1.863224"/>
+    <inertia ixx="0.01781" 
+             iyy="0.003563" 
+             izz="0.02037" 
+             ixy="0.002226" 
+             iyz="-0.0008328" 
+             ixz="0.0002878"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.001523 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.001523 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link3_1">
+  <inertial>
+    <origin xyz="-0.0 0.11541444998364736 0.013649097933998836" rpy="0 0 0"/>
+    <mass value="0.904315"/>
+    <inertia ixx="0.01374" 
+             iyy="0.0009585" 
+             izz="0.01392" 
+             ixy="0.0004506" 
+             iyz="-0.0007046" 
+             ixz="0.000064200508"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.308477 0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.308477 0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link4_1">
+  <inertial>
+    <origin xyz="0.0 0.002871377179418988 -2.4706069597529916e-10" rpy="0 0 0"/>
+    <mass value="0.261183"/>
+    <inertia ixx="0.000153" 
+             iyy="0.000144" 
+             izz="0.0001626" 
+             ixy="0.000007504862" 
+             iyz="-0.000000008483" 
+             ixz="-0.000000007056"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 -0.618477 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 -0.618477 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- add tool center point link for easier visualization -->
+<link name="tcp_link">
+  <visual>
+    <geometry>
+      <box size="0.01 0.01 0.01"/>
+    </geometry>
+    <material name="red">
+      <color rgba="1.0 0.0 0.0 0.6"/>
+    </material>
+  </visual>
+</link>
+
+<joint name="tcp_fixed" type="fixed">
+  <origin xyz="0.0 0.0795 0.0" rpy="0 0 0"/>
+  <parent link="gripper_base_1"/>
+  <child link="tcp_link"/>
+</joint>
+
+<link name="gripper_base_1">
+  <inertial>
+    <origin xyz="0.0 0.01128514374633649 -0.004836003736858561" rpy="0 0 0"/>
+    <mass value="0.130337"/>
+    <inertia ixx="0.00008551164" 
+             iyy="0.0001216" 
+             izz="0.000059771966" 
+             ixy="-0.000003161031" 
+             iyz="0.000001110492" 
+             ixz="-0.000003519581"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 -0.658977 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/gripper_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 -0.658977 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/gripper_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="inner_link_left_1">
+  <inertial>
+    <origin xyz="0.004775263006022466 0.014691054356398392 0.0" rpy="0 0 0"/>
+    <mass value="0.010214"/>
+    <inertia ixx="0.000007990586" 
+             iyy="0.000005973968" 
+             izz="0.000002702176" 
+             ixy="-0.000000446816" 
+             iyz="0.0000" 
+             ixz="-0.00000"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.018 -0.679499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/inner_link_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="0.018 -0.679499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/inner_link_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="outer_link_right_1">
+  <inertial>
+    <origin xyz="0.0029741808490290345 0.020000417105897617 0.0" rpy="0 0 0"/>
+    <mass value="0.015216"/>
+    <inertia ixx="0.000009064719" 
+             iyy="0.000006207691" 
+             izz="0.000003674706" 
+             ixy="0.000000861905" 
+             iyz="-0.0" 
+             ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.038 -0.679499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/outer_link_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.038 -0.679499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/outer_link_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="outer_link_left_1">
+  <inertial>
+    <origin xyz="-0.002974180849028861 0.020000417105899837 0.0" rpy="0 0 0"/>
+    <mass value="0.015216"/>
+    <inertia ixx="0.000009073869" 
+             iyy="0.000006198542" 
+             izz="0.000003674706" 
+             ixy="-0.000000846555" 
+             iyz="0.00000" 
+             ixz="0.00000"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.038 -0.679499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/outer_link_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="0.038 -0.679499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/outer_link_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- NOTE: urdf doesnt support kinematic closed loop, 
+so we need to left one on the joints open -->
+
+<!-- use this when using inner link -->
+<link name="finger_right_1">
+  <inertial>
+    <origin xyz="0.002489444086893569 0.012411313372935995 0.0" rpy="0 0 0"/>
+    <mass value="0.022898"/>
+    <inertia ixx="0.000017128826" 
+             iyy="0.000011930401" 
+             izz="0.000008715513" 
+             ixy="0.000001953953" 
+             iyz="0.00" 
+             ixz="-0.00"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.018 -0.719499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/finger_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.018 -0.719499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/finger_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="finger_left_1">
+  <inertial>
+    <origin xyz="-0.0024894440868974757 0.012411313372938326 0.0" rpy="0 0 0"/>
+    <mass value="0.022898"/>
+    <inertia ixx="0.000017128826" 
+             iyy="0.000011930401" 
+             izz="0.000008715513" 
+             ixy="-0.000001953953" 
+             iyz="0.00" 
+             ixz="-0.00"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.018 -0.719499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/finger_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="0.018 -0.719499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/finger_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+<!-- end of inner link -->
+
+<!-- use this when using outer link -->
+<!-- <link name="finger_right_1">
+  <inertial>
+    <origin xyz="-0.01751055591310643 0.012411313372935995 0.0" rpy="0 0 0"/>
+    <mass value="0.08357364665097004"/>
+    <inertia ixx="6.7e-05" iyy="4.7e-05" izz="3.5e-05" ixy="8e-06" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.038 -0.719499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/finger_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.038 -0.719499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/finger_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="finger_left_1">
+  <inertial>
+    <origin xyz="0.017510555913102525 0.012411313372938326 0.0" rpy="0 0 0"/>
+    <mass value="0.08357364665097004"/>
+    <inertia ixx="6.7e-05" iyy="4.7e-05" izz="3.5e-05" ixy="-8e-06" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.038 -0.719499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/finger_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="0.038 -0.719499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/finger_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link> -->
+<!-- end of outer link -->
+
+<link name="inner_link_right_1">
+  <inertial>
+    <origin xyz="-0.003238561697949489 0.01183851365994859 0.0" rpy="0 0 0"/>
+    <mass value="0.009152"/>
+    <inertia ixx="0.000006905758" 
+             iyy="0.000005170951" 
+             izz="0.000002372537" 
+             ixy="0.000000349609" 
+             iyz="0.000000273496" 
+             ixz="-0.000000039247"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.018 -0.679499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/inner_link_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver-amir"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.018 -0.679499 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amir_description/meshes/inner_link_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!--
+  - Refer here about how to set each parameters: 
+  - http://wiki.ros.org/urdf/XML/joint#Elements 
+  - units (revolute joints):
+  - effort  : N∙m
+  - velocity: rad/s
+  - damping : N∙m∙s/rad
+  - friction: N∙m
+-->
+
+<joint name="Joint_1" type="revolute">
+  <origin xyz="-0.0 -0.001523 -0.097" rpy="0 0 0"/>
+  <parent link="link0_1"/>
+  <child link="link1_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit upper="2.96706" lower="-2.96706" effort="33" velocity="1"/>
+  <dynamics damping="0.6" friction="0.3" />
+</joint>
+
+<joint name="Joint_2" type="revolute">
+  <origin xyz="-0.0 0.0 0.097" rpy="0 0 0"/>
+  <parent link="link1_1"/>
+  <child link="link2_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+  <limit upper="2.356194" lower="0" effort="22" velocity="1"/>
+  <dynamics damping="0.6" friction="0.3" />
+</joint>
+
+<joint name="Joint_3" type="revolute">
+  <origin xyz="0.0 0.31 -0.0" rpy="0 0 0"/>
+  <parent link="link2_1"/>
+  <child link="link3_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+  <limit upper="0.0" lower="-2.792527" effort="26" velocity="1"/>
+  <dynamics damping="0.6" friction="0.3" />
+</joint>
+
+<joint name="Joint_4" type="revolute">
+  <origin xyz="-0.0 0.31 0.0" rpy="0 0 0"/>
+  <parent link="link3_1"/>
+  <child link="link4_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+  <limit lower="-2.094395" upper="1.308997" effort="1.3" velocity="1"/>
+  <dynamics damping="0.3" friction="0.1" />
+</joint>
+
+<joint name="Joint_5" type="revolute">
+  <origin xyz="0.0 0.0405 0.0" rpy="0 0 0"/>
+  <parent link="link4_1"/>
+  <child link="gripper_base_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit lower="-2.75762" upper="2.75762" effort="0.4" velocity="2"/>
+  <dynamics damping="0.3" friction="0.1" />
+</joint>
+
+<joint name="Gripper" type="revolute">
+  <origin xyz="0.018367 0.020522 0.0" rpy="0 0 0"/>
+  <parent link="gripper_base_1"/>
+  <child link="inner_link_right_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit lower="-1.047198" upper="0.261799" effort="0.4" velocity="2"/>
+</joint>
+
+<joint name="left_inner_back_joint" type="continuous">
+  <origin xyz="-0.017633 0.020522 0.0" rpy="0 0 0"/>
+  <parent link="gripper_base_1"/>
+  <child link="inner_link_left_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <!-- <limit lower="-1.047198" upper="0.261799" effort="10" velocity="4"/> -->
+  <mimic joint="Gripper" multiplier="1" offset="0" />
+</joint>
+
+<joint name="right_outer_back_joint" type="continuous">
+  <origin xyz="0.038367 0.020522 0.0" rpy="0 0 0"/>
+  <parent link="gripper_base_1"/>
+  <child link="outer_link_right_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <!-- <limit lower="-1.047198" upper="0.261799" effort="10" velocity="4"/> -->
+  <mimic joint="Gripper" multiplier="1" offset="0" />
+</joint>
+
+<joint name="left_outer_back_joint" type="continuous">
+  <origin xyz="-0.037633 0.020522 0.0" rpy="0 0 0"/>
+  <parent link="gripper_base_1"/>
+  <child link="outer_link_left_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <!-- <limit lower="-1.047198" upper="0.261799" effort="10" velocity="4"/> -->
+  <mimic joint="Gripper" multiplier="1" offset="0" />
+</joint>
+
+<!-- use this when using inner joint -->
+<joint name="right_inner_front_joint" type="continuous">
+  <origin xyz="0.0 0.04 0.0" rpy="0 0 0"/>
+  <parent link="inner_link_right_1"/>
+  <child link="finger_right_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <!-- <limit lower="-1.047198" upper="0.261799" effort="10" velocity="4"/> -->
+  <mimic joint="Gripper" multiplier="1" offset="0" />
+</joint>
+
+<joint name="left_inner_front_joint" type="continuous">
+  <origin xyz="-0.0 0.04 0.0" rpy="0 0 0"/>
+  <parent link="inner_link_left_1"/>
+  <child link="finger_left_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <!-- <limit lower="-1.047198" upper="0.261799" effort="10" velocity="4"/> -->
+  <mimic joint="Gripper" multiplier="1" offset="0" />
+</joint>
+<!-- end of inner joint -->
+
+<!-- use this when using outer joint -->
+<!-- <joint name="right_outer_front_joint" type="revolute">
+  <origin xyz="0.0 0.04 0.0" rpy="0 0 0"/>
+  <parent link="outer_link_right_1"/>
+  <child link="finger_right_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <limit lower="-1.047198" upper="0.261799" effort="10" velocity="4"/>
+  <mimic joint="Gripper" multiplier="1" offset="0" />
+</joint>
+
+<joint name="left_outer_front_joint" type="revolute">
+  <origin xyz="0.0 0.04 0.0" rpy="0 0 0"/>
+  <parent link="outer_link_left_1"/>
+  <child link="finger_left_1"/>
+  <axis xyz="-0.0 0.0 1.0"/>
+  <limit lower="-1.047198" upper="0.261799" effort="10" velocity="4"/>
+  <mimic joint="Gripper" multiplier="1" offset="0" />
+</joint> -->
+<!-- end of outer joint -->
+
+</robot>

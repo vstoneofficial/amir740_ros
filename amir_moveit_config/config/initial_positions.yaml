@@ -1,0 +1,9 @@
+# Default initial positions for amir's ros2_control fake system
+
+initial_positions:
+  Gripper: 0
+  Joint_1: 0
+  Joint_2: 0
+  Joint_3: 0
+  Joint_4: 0
+  Joint_5: 0

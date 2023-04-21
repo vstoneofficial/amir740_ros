@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: amir_description
+    relative_path: urdf/amir.xacro
+  srdf:
+    relative_path: config/amir.srdf
+  package_settings:
+    author_name: Vstone
+    author_email: infodesk@vstone.co.jp
+    generated_timestamp: 1680149729
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

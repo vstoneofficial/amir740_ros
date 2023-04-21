@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<robot name="amir_f120a" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+ <!-- Include F120A rover URDF -->
+<xacro:include filename="$(find megarover_description)/urdf/f120a_base_model.xacro"/>
+ <!-- Include AMIR URDF -->
+<xacro:include filename="$(find amir_description)/urdf/amir_for_rover.xacro"/>
+
+<joint name="base_fixed" type="fixed">
+  <origin xyz="0.0 0.0 0.4365" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="link0_1"/>
+</joint>
+
+</robot>
