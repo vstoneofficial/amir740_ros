@@ -2,7 +2,7 @@
 Changelog for package amir
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.1 (2023-04-21)
+------------------
 * initial commit
 * Contributors: jie-2204
