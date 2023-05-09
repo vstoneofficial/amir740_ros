@@ -86,7 +86,7 @@ ros2 launch amir_moveit_config demo.launch.py
 
 - 「bringup」ファイルを起動し、MoveItで実際のロボットを制御するには、以下のコマンドを実行してください：
   > **Note**\
-  > AMIR 740のファームウェアを更新する必要があります。詳細については、ドキュメントを参照してください。
+  > AMIR 740のファームウェアを更新する必要があります。詳細については、製品に同梱されているドキュメントを参照してください。
 ```bash
 # First terminal
 ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0 -v6
@@ -94,6 +94,9 @@ ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0 -v6
 # Second terminal
 ros2 launch amir_bringup amir_moveit.launch.py
 ```
+  > **Warning**\
+  > - micro-ROSを使用して通信ができたら、自動的に原点復帰が開始されるため、ご注意ください。
+  > - micro_ros_agentを立ち上げた後、VS-WRC058c基板をリセットする必要がある場合は、基板のリセットボタンを押してください。
 
 ## ライセンス
 
