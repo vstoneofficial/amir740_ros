@@ -4,7 +4,7 @@
 <xacro:property name="body_color" value="Gazebo/Silver" />
 
 <gazebo>
-  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+  <plugin name="mimic_joint_plugin_1" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
     <joint>Gripper</joint>
     <mimicJoint>left_inner_back_joint</mimicJoint>
     <multiplier>1.0</multiplier>
@@ -14,7 +14,7 @@
 </gazebo>
 
 <gazebo>
-  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+  <plugin name="mimic_joint_plugin_2" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
     <joint>Gripper</joint>
     <mimicJoint>left_outer_back_joint</mimicJoint>
     <multiplier>1.0</multiplier>
@@ -24,7 +24,7 @@
 </gazebo>
 
 <gazebo>
-  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+  <plugin name="mimic_joint_plugin_3" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
     <joint>Gripper</joint>
     <mimicJoint>right_outer_back_joint</mimicJoint>
     <multiplier>1.0</multiplier>
@@ -34,7 +34,7 @@
 </gazebo>
 
 <gazebo>
-  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+  <plugin name="mimic_joint_plugin_4" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
     <joint>Gripper</joint>
     <mimicJoint>left_inner_front_joint</mimicJoint>
     <multiplier>1.0</multiplier>
@@ -44,7 +44,7 @@
 </gazebo>
 
 <gazebo>
-  <plugin name="mimic_joint_plugin" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+  <plugin name="mimic_joint_plugin_5" filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
     <joint>Gripper</joint>
     <mimicJoint>right_inner_front_joint</mimicJoint>
     <multiplier>1.0</multiplier>
@@ -54,15 +54,18 @@
 </gazebo>
 
 <gazebo>
-  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+  <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
     <controlPeriod>0.001</controlPeriod>
+    <parameters>$(find amir_moveit_config)/config/ros2_controllers.yaml</parameters>
+    <robot_param>robot_description</robot_param>
+    <robot_param_node>robot_state_publisher</robot_param_node>
   </plugin>
 </gazebo>
 
 <gazebo reference="link0_1">
   <material>${body_color}</material>
-  <mu1>1.4</mu1>
-  <mu2>1.4</mu2>
+  <mu1>2.5</mu1>
+  <mu2>2.5</mu2>
   <selfCollide>true</selfCollide>
   <gravity>true</gravity>
 </gazebo>

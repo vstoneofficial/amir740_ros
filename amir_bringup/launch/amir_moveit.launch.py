@@ -1,4 +1,6 @@
 import os
+import glob
+import yaml
 
 from ament_index_python.packages import get_package_share_path
 from ament_index_python.packages import get_package_share_directory
@@ -10,66 +12,123 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.event_handlers import OnProcessExit
 
 from launch.substitutions import LaunchConfiguration
-
 from launch_ros.actions import Node
-from launch.substitutions import LaunchConfiguration
+
 import xacro
+
+
+def _read_text_file(path: str) -> str:
+    # Read file as text
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+
+def _load_srdf_text(config_dir: str) -> str:
+    # Load SRDF or SRDF.xacro from the MoveIt config directory
+    srdf_xacro = sorted(glob.glob(os.path.join(config_dir, "*.srdf.xacro")))
+    if srdf_xacro:
+        doc = xacro.process_file(srdf_xacro[0])
+        return doc.toprettyxml(indent="  ")
+
+    srdf = sorted(glob.glob(os.path.join(config_dir, "*.srdf")))
+    if srdf:
+        return _read_text_file(srdf[0])
+
+    raise FileNotFoundError(f"SRDF not found in: {config_dir}")
+
+
+def _find_kinematics_yaml_path(config_dir: str) -> str:
+    # Prefer kinematics.yaml, otherwise pick the first *kinematics*.yaml
+    preferred = os.path.join(config_dir, "kinematics.yaml")
+    if os.path.exists(preferred):
+        return preferred
+
+    candidates = sorted(glob.glob(os.path.join(config_dir, "*kinematics*.yaml")))
+    if candidates:
+        return candidates[0]
+
+    raise FileNotFoundError(f"Kinematics YAML not found in: {config_dir}")
+
+
+def _load_yaml(path: str) -> dict:
+    # Load YAML as dict
+    with open(path, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    return data if isinstance(data, dict) else {}
+
 
 def generate_launch_description():
     # Get URDF via xacro
     urdf_path = os.path.join(
-        get_package_share_directory('amir_moveit_config'),
-        'config',
-        'amir.urdf.xacro')
+        get_package_share_directory("amir_moveit_config"),
+        "config",
+        "amir.urdf.xacro",
+    )
 
-    default_rviz_config_path = get_package_share_path('amir_bringup') / 'rviz/amir_moveit.rviz'
+    default_rviz_config_path = get_package_share_path("amir_bringup") / "rviz/amir_moveit.rviz"
 
-    model_arg = DeclareLaunchArgument(name='model',
-                                      default_value=str(urdf_path),
-                                      description='Absolute path to robot urdf file')
-    
-    rviz_arg = DeclareLaunchArgument(name='rvizconfig',
-                                     default_value=str(default_rviz_config_path),
-                                     description='Absolute path to rviz config file')
-    
+    model_arg = DeclareLaunchArgument(
+        name="model",
+        default_value=str(urdf_path),
+        description="Absolute path to robot urdf file",
+    )
+
+    rviz_arg = DeclareLaunchArgument(
+        name="rvizconfig",
+        default_value=str(default_rviz_config_path),
+        description="Absolute path to rviz config file",
+    )
+
     ros2_control_hardware_type = DeclareLaunchArgument(
         name="ros2_control_hardware_type",
         default_value="mock_components",
         description="ROS2 control hardware interface type to use for the launch file -- possible values: [mock_components, amir_hardware]",
     )
 
-    doc = xacro.process_file(urdf_path, 
-                             mappings={'ros2_control_hardware_type': "amir_hardware"}
+    doc = xacro.process_file(
+        urdf_path,
+        mappings={"ros2_control_hardware_type": "amir_hardware"},
     )
-
-    robot_description_real = doc.toprettyxml(indent='  ')
+    robot_description_real = doc.toprettyxml(indent="  ")
 
     amir_controllers = os.path.join(
-        get_package_share_directory('amir_moveit_config'),
-        'config',
-        'ros2_controllers.yaml'
+        get_package_share_directory("amir_moveit_config"),
+        "config",
+        "ros2_controllers.yaml",
     )
 
     control_node_real = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[{'robot_description': robot_description_real}, amir_controllers],
+        parameters=[{"robot_description": robot_description_real}, amir_controllers],
         output="both",
     )
- 
+
     robot_state_pub_node_real = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="screen",
-        parameters=[{'robot_description': robot_description_real}],
+        parameters=[{"robot_description": robot_description_real}],
     )
+
+    # --- Fix for "no interactive markers":
+    # Pass semantic + kinematics to RViz node as parameters.
+    moveit_config_dir = os.path.join(get_package_share_directory("amir_moveit_config"), "config")
+    robot_description_semantic = _load_srdf_text(moveit_config_dir)
+    kinematics_yaml_path = _find_kinematics_yaml_path(moveit_config_dir)
+    kinematics_dict = _load_yaml(kinematics_yaml_path)
 
     rviz_node = Node(
         package="rviz2",
         executable="rviz2",
         name="rviz2",
-        output='screen',
-        arguments=["-d", LaunchConfiguration('rvizconfig')],
+        output="screen",
+        arguments=["-d", LaunchConfiguration("rvizconfig")],
+        parameters=[
+            {"robot_description": robot_description_real},
+            {"robot_description_semantic": robot_description_semantic},
+            {"robot_description_kinematics": kinematics_dict},
+        ],
     )
 
     joint_state_broadcaster_spawner = Node(
@@ -102,8 +161,10 @@ def generate_launch_description():
     launch_move_group = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(
-                get_package_share_directory('amir_moveit_config'),
-                'launch/move_group.launch.py'))
+                get_package_share_directory("amir_moveit_config"),
+                "launch/move_group.launch.py",
+            )
+        )
     )
 
     nodes = [
@@ -120,3 +181,4 @@ def generate_launch_description():
     ]
 
     return LaunchDescription(nodes)
+

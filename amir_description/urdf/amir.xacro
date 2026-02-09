@@ -276,7 +276,7 @@
   </collision>
 </link>
 
-<!-- NOTE: urdf doesnt support kinematic closed loop, 
+<!-- urdf doesnt support kinematic closed loop, 
 so we need to left one on the joints open -->
 
 <!-- use this when using inner link -->
@@ -404,13 +404,13 @@ so we need to left one on the joints open -->
 </link>
 
 <!--
-  - Refer here about how to set each parameters: 
+  - Refer here about how to set each parameters 
   - http://wiki.ros.org/urdf/XML/joint#Elements 
-  - units (revolute joints):
-  - effort  : N∙m
-  - velocity: rad/s
-  - damping : N∙m∙s/rad
-  - friction: N∙m
+  - units (revolute joints)
+  - effort   N∙m
+  - velocity rad/s
+  - damping  N∙m∙s/rad
+  - friction N∙m
 -->
 
 <joint name="Joint_1" type="revolute">
@@ -534,3 +534,4 @@ so we need to left one on the joints open -->
 <!-- end of outer joint -->
 
 </robot>
+

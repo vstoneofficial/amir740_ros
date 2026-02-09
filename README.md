@@ -9,14 +9,21 @@
 ヴイストン株式会社より発売されている台車用ロボットアーム「AMIR 740」をROS 2で制御するためのパッケージです。別途Linux搭載のPC及びロボット実機が必要になります。
 
 
-# Table of Contents
+# 目次
 <!-- TOC -->
 
-- [必要機器 & 開発環境](#%E5%BF%85%E8%A6%81%E6%A9%9F%E5%99%A8--%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83)
-- [パッケージ内容](#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%86%85%E5%AE%B9)
-- [インストール方法](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95)
-- [利用方法](#%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95)
-- [ライセンス](#%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9)
+- [必要機器 & 開発環境](#必要機器--開発環境)
+- [ファイルの構成](#ファイルの構成)
+- [パッケージ内容](#パッケージ内容)
+- [インストール方法](#インストール方法)
+- [使用方法](#使用方法)
+  - [URDFモデルの表示](#urdfモデルの表示)
+  - AMIR 740（実機）との通信**: ROS 2とMicro-ROSを統合するためのエージェントノードを起動。
+    - [有線シリアル接続の場合](#有線シリアル接続の場合)
+    - [Wi-Fi 接続の場合](#wifi-接続の場合)
+  - [ロボットアームをROS 2経由で遠隔操作](#ロボットアームをros-2経由で遠隔操作)
+  - [Gazeboシミュレータ](#gazeboシミュレータ)
+- [ライセンス](#ライセンス)
 
 <!-- /TOC -->
 
@@ -27,38 +34,37 @@
 - Ubuntu Linux - Jammy Jellyfish (22.04)
 - ROS 2 Humble Hawksbill
 
+## ファイルの構成
+   ```
+    ros2_ws/src
+    └ amir740_ros
+　　　　├ amir
+　　　　├ amir_bringup
+　　　　├ amir_description
+　　　　├ amir_driver
+　　　　├ amir_interfaces
+　　　　└ amir_moveit_config
+   ```
+
 ## パッケージ内容
 
-- `amir` : AMIR 740メタパッケージ。
-- `amir_bringup` : AMIR 740の実機ロボットを操作するために必要なスクリプト、ランチファイル、および依存関係のパッケージ。
+- `amir` : AMIR740メタパッケージ。
+- `amir_bringup` : AMIR740の実機ロボットを操作するために必要なスクリプト、ランチファイル、および依存関係のパッケージ。
 - `amir_description` : AMIRの表示に必要なメッシュファイルを含むパッケージ。
-- `amir_driver` : ROS 2 ControlでAMIR 740を制御するためのドライバーパッケージ。
-- `amir_interfaces` : AMIR 740ロボットとの通信のためのメッセージ定義を含むパッケージ。
-- `amir_moveit_config` : AMIR 740用のMoveIt構成に関連するパッケージ。
+- `amir_driver` : ROS2 ControlでAMIR740を制御するためのドライバーパッケージ。
+- `amir_interfaces` : AMIR740ロボットとの通信のためのメッセージ定義を含むパッケージ。
+- `amir_moveit_config` : AMIR740用のMoveIt構成に関連するパッケージ。
 
 ## インストール方法
 
-1. [こちら](https://docs.ros.org/en/humble/Installation.html)の手順に従って、ROS 2 Humbleをインストールしてください。
-2. このリポジトリをワークスペースにクローンしてください:
+1. [こちら](https://docs.ros.org/en/humble/Installation.html)の手順に従って、ROS2 Humbleをインストールしてください。
+2. [micro-ROS](https://micro.ros.org/) Agent のセットアップ: *(実機を動かす場合のみ必要)*
+
 ```bash
-mkdir -p ~/ros2_ws/src
-cd ~/ros2_ws/src
-git clone -b $ROS_DISTRO https://github.com/vstoneofficial/amir740_ros.git
-rosdep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
-```
-3. ワークスペースをビルド:
-```bash
-cd ~/ros2_ws
-colcon build
-```
-4. ワークスペースのオーバレイ作業:
-```bash
-source ~/ros2_ws/install/setup.bash
-```
-5. 「micro-ROS Agent」をインストール: (実機を動かす場合のみ必要)
-```bash
-cd ~/ros2_ws
+mkdir -p ~/uros_ws/src
+cd ~/uros_ws/src
 git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup
+cd ~/uros_ws
 rosdep update && rosdep install --from-paths src --ignore-src -y
 colcon build
 source install/local_setup.bash
@@ -68,35 +74,84 @@ ros2 run micro_ros_setup build_agent.sh
 source install/local_setup.bash
 ```
 
+3. このリポジトリをワークスペースにクローンしてください:
+
+```bash
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+git clone -b $ROS_DISTRO https://github.com/vstoneofficial/amir740_ros.git
+rosdep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
+```
+
+4. ワークスペースをビルド:
+
+```bash
+cd ~/ros2_ws
+colcon build --symlink-install
+```
+
+5. ワークスペースのオーバレイ作業:
+
+```bash
+source ~/ros2_ws/install/local_setup.bash
+```
+
+6. シェルを起動時にワークスペースがオーバーレイされるように設定します。
+
+```bash
+$ echo "source ~/uros_ws/install/local_setup.bash" >> ~/.bashrc 
+$ echo "source ~/ros2_ws/install/local_setup.bash" >> ~/.bashrc
+```
+
+
 以上で`amir740_ros`パッケージのセットアップは完了です。
 
-## 利用方法
+## 使用方法
 
-- RViz上でAMIR 740のモデルを表示する場合, 以下のコマンドで立ち上げます:
+このパッケージには、以下の主要な機能が含まれています。（詳細は各ファイルを確認してください）
+
+### URDFモデルの表示 
+以下のコマンドを実行して、amir740のURDFモデルを表示します。
+
 ```bash
 ros2 launch amir_description display.launch.py
 ```
 <img src="./images/rviz-display.png" width="600" />
 
-- MoveItの「デモ」モードを起動するには、以下のコマンドを実行してください：
+MoveItの「デモ」モードを起動するには、以下のコマンドを実行してください：
 ```bash
 ros2 launch amir_moveit_config demo.launch.py
 ```
 <img src="./images/moveit-demo.png" width="600" />
 
-- 「bringup」ファイルを起動し、MoveItで実際のロボットを制御するには、以下のコマンドを実行してください：
-  > **Note**\
-  > AMIR 740のファームウェアを更新する必要があります。詳細については、製品に同梱されているドキュメントを参照してください。
-```bash
-# First terminal
-ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0 -v6
 
-# Second terminal
+### AMIR 740（実機）との通信**: ROS 2とMicro-ROSを統合するためのエージェントノードを起動。
+#### ● 有線シリアル接続の場合:
+```bash
+ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0 --baudrate 921600 -v4
+```
+
+####  ● Wi-Fi 接続の場合:
+```bash
+ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
+```
+
+### ロボットアームをROS 2経由で遠隔操作
+MoveItを使用してロボットを操作するためのノードを起動。
+
+```bash
 ros2 launch amir_bringup amir_moveit.launch.py
 ```
-  > **Warning**\
-  > - micro-ROSを使用して通信ができたら、自動的に原点復帰が開始されるため、ご注意ください。
-  > - micro_ros_agentを立ち上げた後、VS-WRC058c基板をリセットする必要がある場合は、基板のリセットボタンを押してください。
+
+### Gazeboシミュレータ
+以下のコマンドでGazeboでAMIR 740のシミュレーションを起動します。
+```bash
+ros2 launch amir_moveit_config gazebo.launch.py
+```
+MoveItで操作するGazeboのシミュレーションは次のコマンドで立ち上げてください。
+```bash
+ros2 launch amir_moveit_config demo_gazebo.launch.py
+```
 
 ## ライセンス
 

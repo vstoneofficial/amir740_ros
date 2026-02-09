@@ -56,6 +56,12 @@
         <joint name="Joint_4" value="-1.5708"/>
         <joint name="Joint_5" value="0"/>
     </group_state>
+    <group_state name="close" group="gripper">
+        <joint name="Gripper" value="0.140"/>
+    </group_state>
+    <group_state name="home" group="gripper">
+        <joint name="Gripper" value="0"/>
+    </group_state>
     <group_state name="open" group="gripper">
         <joint name="Gripper" value="-1.0471"/>
     </group_state>
